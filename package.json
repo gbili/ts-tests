@@ -1,0 +1,14 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "tests",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guillermo Pages <mail@guillermo.at> (https://guillermo.at)",
+  "license": "MIT",
+  "dependencies": {
+    "shades": "2.1.0"
+  }
+}
