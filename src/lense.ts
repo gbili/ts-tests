@@ -121,7 +121,6 @@ mod(barLense)((x: number) => x + 1)(foo); // { bar: 43, }
 
 foo.bar; // 42
 
-
 const modifyUsingBarLense = mod(barLense);
 const barModifier = modifyUsingBarLense(x => x + 1);
 const foo2 = barModifier(foo)
