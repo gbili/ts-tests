@@ -5,7 +5,7 @@ interface Getter<S, A extends keyof S> {
 }
 
 // Exclude from T those types that are assignable to U
-type RemoveTIfExtends<T, U> = T extends U ? never : T;
+type RemoveIfAssignable<T, U> = T extends U ? never : T;
 
 // From T, pick a set of properties whose keys are in the union K
 type PickSomeTProps<T, K extends keyof T> = {
@@ -24,7 +24,7 @@ type AllPropsRequired<T> = {
     [P in keyof T]-?: T[P];
 };
 type RequiredKeys<T, K extends keyof T> = 
-    RemoveTIfExtends<T, K> // remove T if assignable to K 
+    RemoveIfAssignable<T, K> // remove T if assignable to K 
     & AllPropsRequired<
         PickSomeTProps<T, K>
     >;
@@ -38,7 +38,7 @@ interface Lens<S, T, A extends keyof S, B extends keyof T> {
 
 interface Lenso<S, T, A extends keyof S, B extends keyof T> {
     get: (obj: S) => S[A];
-    mod: (f: (prop: NotNullAndNotUndefined<S[A]>) => T[B]) => (obj: S) => T;
+    mod: (f: (prop: RemoveIfAssignable<S[A], null | undefined>) => T[B]) => (obj: S) => T;
 }
 
 // or equivalently with our copy of Required
@@ -128,7 +128,7 @@ const foo2 = barModifier(foo)
 foo2.bar; // 42
 
 const modifyUsingBazLense = mod(bazLense);
-const bazModifier = modifyUsingBazLense(x => x + 1);
+const bazModifier = modifyUsingBazLense(x => x + 1); // [ts] Error - x is possibly 'undefined' 
 const foo3 = bazModifier(foo)
 
-foo3.baz; // 
+foo3.baz; //
