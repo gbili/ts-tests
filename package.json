@@ -9,6 +9,12 @@
   "author": "Guillermo Pages <mail@guillermo.at> (https://guillermo.at)",
   "license": "MIT",
   "dependencies": {
+    "@types/requirejs": "2.1.31",
+    "ramda": "0.26.1",
+    "requirejs": "2.3.6",
     "shades": "2.1.0"
+  },
+  "devDependencies": {
+    "@types/ramda": "0.26.40"
   }
 }
